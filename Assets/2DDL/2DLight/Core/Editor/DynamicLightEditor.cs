@@ -585,7 +585,7 @@ namespace DynamicLight2D
 
 				GUILayout.Space(2);
 				if (GUILayout.Button("Bug?",  EditorStyles.miniButtonMid,miniButtonWidth)){
-					BugReportWindow.Init();
+					//BugReportWindow.Init();
 				}
 				
 				GUILayout.Space(2);
