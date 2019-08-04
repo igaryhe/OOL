@@ -8,6 +8,7 @@ TagManager:
   - deadTrigger
   - 2ddl
   - Button
+  - Battery
   layers:
   - Default
   - TransparentFX

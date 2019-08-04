@@ -29,7 +29,6 @@ public class DoorTrigger : MonoBehaviour
             _s = 0;
             _e += Time.deltaTime;
             door.position = Vector3.Lerp(door.position, _start, _e);
- 
         }
     }
 
