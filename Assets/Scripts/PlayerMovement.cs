@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private float _speed = 5f;
     private Rigidbody2D _rb;
     private float _x, _y, _rx, _ry;
-    private float _rotateSpeed = 100f;
+    private float _rotateSpeed = 200f;
 
     private void Start()
     {
