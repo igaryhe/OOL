@@ -1,42 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float _speed = 2f;
+    private float _speed = 5f;
+    private Rigidbody2D _rb;
+    private float _x, _y, _rx, _ry;
+    private float _rotateSpeed = 100f;
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
-        LookAtMousePosition();
+        Rotate();
         Move();
     }
 
-    private void LookAtMousePosition()
+    private void Rotate()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var direction = (Vector2) (mousePos - transform.position).normalized;
-        transform.up = direction;
+        _rx = Input.GetAxis("RH");
+        _ry = Input.GetAxis("RV");
+        var direction = new Vector2(_rx, -_ry);
+        var deltaAngle = Vector3.SignedAngle(transform.right, direction, Vector3.forward);
+        if (deltaAngle > 5)
+        {
+            transform.Rotate(Vector3.forward, Time.deltaTime * _rotateSpeed);
+        }
+        else if (deltaAngle < -5)
+        {
+            transform.Rotate(Vector3.forward, Time.deltaTime * -_rotateSpeed);
+        }
     }
 
     private void Move()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            var deltaY = _speed * Time.deltaTime;
-            transform.position += new Vector3(0, deltaY);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            var deltaY = _speed * Time.deltaTime;
-            transform.position += new Vector3(0, -deltaY);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            var deltaX = _speed * Time.deltaTime;
-            transform.position += new Vector3(-deltaX, 0);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            var deltaX = _speed * Time.deltaTime;
-            transform.position += new Vector3(deltaX, 0);
-        }
+        _x = Input.GetAxis("Horizontal");
+        _y = Input.GetAxis("Vertical");
+        _rb.MovePosition(_rb.position + _speed * Time.deltaTime * new Vector2(_x, _y));
     }
 }
