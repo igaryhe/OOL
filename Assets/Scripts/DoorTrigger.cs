@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    public Door door;
+    public Transform door;
     public LightTrigger[] lts;
     public Vector3 offset;
     private Coroutine _coroutine;
@@ -22,37 +22,14 @@ public class DoorTrigger : MonoBehaviour
         {
             _e = 0;
             _s += Time.deltaTime;
-            door.transform.position = Vector3.Lerp(door.transform.position, _end, _s);
-            /*
-            if (door.isMoving)
-            {
-                // StopCoroutine(_coroutine);
-                door.transform.position = Vector3.Lerp(door.transform.position, _end, Time.time);
-                if (door.transform.position == _end)
-                {
-                    door.isMoving = false;
-                }
-            }
-            */
-            // _coroutine = StartCoroutine(door.Move(_end, 1));
+            door.position = Vector3.Lerp(door.position, _end, _s);
         }
         else
         {
             _s = 0;
             _e += Time.deltaTime;
-            door.transform.position = Vector3.Lerp(door.transform.position, _start, _e);
-            /*
-            if (door.isMoving)
-            {
-                // StopCoroutine(_coroutine);
-                door.transform.position = Vector3.Lerp(door.transform.position, _start, Time.time);
-                if (door.transform.position == _start)
-                {
-                    door.isMoving = false;
-                }
-            }
-            */
-            // _coroutine = StartCoroutine(door.Move(_start, 1));
+            door.position = Vector3.Lerp(door.position, _start, _e);
+ 
         }
     }
 
@@ -63,7 +40,6 @@ public class DoorTrigger : MonoBehaviour
         {
             if (lt.isTriggered == false)
             {
-                Debug.Log("false");
                 rt = false;
             }
         }

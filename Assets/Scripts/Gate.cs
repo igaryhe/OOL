@@ -8,6 +8,6 @@ public class Gate : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
